@@ -9,6 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Component
 @Slf4j
 public class TelegramBot extends TelegramLongPollingBot {
+
   @Value("${bot.name}")
   private String botName;
 
@@ -27,6 +28,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 
   @Override
   public void onUpdateReceived(Update update) {
-    log.info(update.getMessage().getText());
+    log.debug(update.getMessage().getText());
   }
 }
