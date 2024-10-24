@@ -42,6 +42,12 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.akretsev</groupId>
+            <artifactId>common-rabbitmq</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 
     <build>
