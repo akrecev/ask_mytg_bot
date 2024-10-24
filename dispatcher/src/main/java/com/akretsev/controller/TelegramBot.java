@@ -1,5 +1,6 @@
 package com.akretsev.controller;
 
+import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,17 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Value("${bot.token}")
     private String botToken;
 
+    private final UpdateController updateController;
+
+    public TelegramBot(UpdateController updateController) {
+        this.updateController = updateController;
+    }
+
+    @PostConstruct
+    public void init() {
+        updateController.registerBot(this);
+    }
+
     @Override
     public String getBotUsername() {
         return botName;
@@ -36,7 +48,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         SendMessage response = new SendMessage();
         response.setChatId(message.getChatId().toString());
-        response.setText("Hello from bot");
+        response.setText(message.getText());
         sendAnswerMessage(response);
     }
 
