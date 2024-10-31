@@ -13,6 +13,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Component
 @Slf4j
 public class TelegramBot extends TelegramLongPollingBot {
+    private final UpdateController updateController;
 
     @Value("${bot.name}")
     private String botName;
@@ -20,7 +21,6 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Value("${bot.token}")
     private String botToken;
 
-    private final UpdateController updateController;
 
     public TelegramBot(UpdateController updateController) {
         this.updateController = updateController;

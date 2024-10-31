@@ -35,10 +35,6 @@ public class UpdateController {
         }
     }
 
-    private void setView(SendMessage sendMessage) {
-        telegramBot.sendAnswerMessage(sendMessage);
-    }
-
     private void distributeMessageByType(Update update) {
         Message message = update.getMessage();
 
@@ -67,5 +63,9 @@ public class UpdateController {
         SendMessage sendMessage =
                 messageProcessor.generateSandMessageWithText(update, "Неподдерживаемый тип сообщения");
         setView(sendMessage);
+    }
+
+    private void setView(SendMessage sendMessage) {
+        telegramBot.sendAnswerMessage(sendMessage);
     }
 }
