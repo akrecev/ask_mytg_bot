@@ -1,5 +1,8 @@
 package com.akretsev.controller;
 
+import static com.akretsev.model.RabbitQueue.*;
+
+import com.akretsev.service.UpdateProducer;
 import com.akretsev.utils.MessageProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -11,11 +14,13 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Slf4j
 public class UpdateController {
     private final MessageProcessor messageProcessor;
+    private final UpdateProducer updateProducer;
 
     private TelegramBot telegramBot;
 
-    public UpdateController(MessageProcessor messageProcessor) {
+    public UpdateController(MessageProcessor messageProcessor, UpdateProducer updateProducer) {
         this.messageProcessor = messageProcessor;
+        this.updateProducer = updateProducer;
     }
 
     public void registerBot(TelegramBot telegramBot) {
@@ -50,14 +55,16 @@ public class UpdateController {
     }
 
     private void processTextMessage(Update update) {
-        SendMessage sendMessage = messageProcessor.generateSandMessageWithText(
-                update, update.getMessage().getText());
-        setView(sendMessage);
+        updateProducer.produce(TEXT_MESSAGE_UPDATE, update);
     }
 
-    private void processDocMessage(Update update) {}
+    private void processDocMessage(Update update) {
+        updateProducer.produce(DOC_MESSAGE_UPDATE, update);
+    }
 
-    private void processPhotoMessage(Update update) {}
+    private void processPhotoMessage(Update update) {
+        updateProducer.produce(PHOTO_MESSAGE_UPDATE, update);
+    }
 
     private void setUnsupportedMessageTypeView(Update update) {
         SendMessage sendMessage =
