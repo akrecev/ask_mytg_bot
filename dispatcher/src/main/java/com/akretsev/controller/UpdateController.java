@@ -36,7 +36,7 @@ public class UpdateController {
         if (update.getMessage() != null) {
             distributeMessageByType(update);
         } else {
-            log.error("Received unsupported message type {}", update);
+            log.error("Unsupported message type is received: {}", update);
         }
     }
 
@@ -60,15 +60,23 @@ public class UpdateController {
 
     private void processDocMessage(Update update) {
         updateProducer.produce(DOC_MESSAGE_UPDATE, update);
+        setFileReceivedView(update);
     }
 
     private void processPhotoMessage(Update update) {
         updateProducer.produce(PHOTO_MESSAGE_UPDATE, update);
+        setFileReceivedView(update);
     }
 
     private void setUnsupportedMessageTypeView(Update update) {
         SendMessage sendMessage =
                 messageProcessor.generateSandMessageWithText(update, "Неподдерживаемый тип сообщения");
+        setView(sendMessage);
+    }
+
+    private void setFileReceivedView(Update update) {
+        SendMessage sendMessage =
+                messageProcessor.generateSandMessageWithText(update, "Файл получен. Идет обработка...");
         setView(sendMessage);
     }
 
