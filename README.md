@@ -3,7 +3,7 @@
 ### Общая архитектура приложения
 ![img.png](img.png)
 
-### [Основано на ...](https://github.com/AndreyYermolenko/BabushkinPogreb)
+### <a href="https://github.com/AndreyYermolenko/BabushkinPogreb" target="_blank">Основано на ...</a>
 
 
 
