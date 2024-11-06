@@ -27,6 +27,10 @@ public class UpdateController {
         this.telegramBot = telegramBot;
     }
 
+    public void setView(SendMessage sendMessage) {
+        telegramBot.sendAnswerMessage(sendMessage);
+    }
+
     public void processUpdates(Update update) {
         if (update == null) {
             log.error("Received update is null");
@@ -78,9 +82,5 @@ public class UpdateController {
         SendMessage sendMessage =
                 messageProcessor.generateSandMessageWithText(update, "Файл получен. Идет обработка...");
         setView(sendMessage);
-    }
-
-    private void setView(SendMessage sendMessage) {
-        telegramBot.sendAnswerMessage(sendMessage);
     }
 }
