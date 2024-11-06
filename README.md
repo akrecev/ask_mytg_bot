@@ -1,5 +1,6 @@
-Телеграм бот
+## Телеграм бот
 
+### Настройка RabbitMQ
 Скачать образ rabbitmq: <br />
 \$ docker pull rabbitmq:3.11.0-management <br />
 
