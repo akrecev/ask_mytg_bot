@@ -1,5 +1,12 @@
 ## Телеграм бот
 
+### Общая архитектура приложения
+![img.png](img.png)
+
+### [Основано на ...](https://github.com/AndreyYermolenko/BabushkinPogreb)
+
+
+
 ### Настройка RabbitMQ
 Скачать образ rabbitmq: <br />
 \$ docker pull rabbitmq:3.11.0-management <br />
@@ -28,3 +35,4 @@
 \$ rabbitmqctl add_user userok p@ssw0rd <br />
 \$ rabbitmqctl set_user_tags userok administrator <br />
 \$ rabbitmqctl set_permissions -p / userok ".*" ".*" ".*" <br />
+
